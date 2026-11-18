@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore sample Kazakhstan journeys, personalized travel lists, guides and weather information.">
+<title>Team members | Kazakhstan Travel Company</title>
+<script>/* Apply saved theme before first paint, without external dependencies. */
+try { if (JSON.parse(localStorage.getItem('theme')) === 'night') document.documentElement.classList.add('theme-night'); } catch (_) {}
+</script>
+<link rel="stylesheet" href="css/style.css">
+<!-- Local jQuery dependency, then shared application modules -->
+<script defer src="js/vendor/jquery.min.js"></script>
+<script defer src="js/tours-data.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/weather.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Kazakhstan Travel Company home"><span class="sun" aria-hidden="true"></span><span>Kazakhstan <strong>Travel</strong></span></a>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false">☰ Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Main menu">
+      <a href="index.html" data-nav="index.html">Tours</a>
+      <a href="tour.html?id=charyn" data-nav="tour.html">Tour guides</a>
+      <a href="weather.html" data-nav="weather.html">Live weather</a>
+      <a href="faq.html" data-nav="faq.html">FAQ</a>
+      <a href="team.html" data-nav="team.html">Team</a>
+      <a href="contact.html" data-guest data-nav="contact.html">Sign up</a>
+      <a href="login.html" data-guest data-nav="login.html">Log in</a>
+      <a href="profile.html" data-member data-nav="profile.html" hidden>My profile</a>
+      <button class="btn btn-small btn-ghost" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      <button class="btn btn-small btn-ghost" id="soundBtn" type="button" aria-pressed="true">Sound: on</button>
+      <button class="btn btn-small" id="openPopup" type="button">Get deals</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <p class="eyebrow">ABOUT THE PROJECT</p><h1>Meet the creators</h1>
+  <p class="lead">A university frontend project by Group SE-2516, combining travel discovery, responsive design, and interactive JavaScript.</p>
+  <section class="team-grid">
+    <article class="member">
+      <!-- Task 9: the real photo is in data-src, jQuery puts it into src when it scrolls into view -->
+      <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/team1.jpg" alt="Photo of Zamanbekov Olzhas" width="480" height="640">
+      <h2>Zamanbekov Olzhas</h2>
+      <p>Team member, Group SE-2516</p>
+    </article>
+    <article class="member">
+      <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/team2.jpg" alt="Photo of Sapargaliyev Danial" width="480" height="640">
+      <h2>Sapargaliyev Danial</h2>
+      <p>Team member, Group SE-2516</p>
+    </article>
+  </section>
+  <section class="next-step"><h2>Built for curious travelers</h2><p>Explore sample tours, save destinations to your browser, and view current weather with the Open-Meteo API. This is an educational prototype; bookings and transactions are not processed.</p><a class="btn" href="index.html">Discover destinations →</a></section>
+</main>
+<div class="overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 id="popupTitle">Get tour deals by email</h2>
+    <p>Explore the offer signup demo. Subscriptions are saved only in this browser, not sent to a server.</p>
+    <form id="subscribeForm" novalidate>
+      <label for="subEmail">Email</label>
+      <input type="text" inputmode="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-describedby="subError">
+      <p class="error" id="subError"></p>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p class="success" id="subSuccess" hidden>Thanks! Subscription saved on this browser (demo). No emails are sent.</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-links"><a href="index.html">Tours</a><a href="tour.html?id=charyn">Tour guides</a><a href="weather.html">Weather</a><a href="faq.html">FAQ</a><a href="team.html">Team</a><a href="contact.html">Sign up</a><a href="login.html">Log in</a></p>
+  <p>&copy; 2026 Kazakhstan Travel Company · Student travel website · SE-2516</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore sample Kazakhstan journeys, personalized travel lists, guides and weather information.">
+<title>Create account | Kazakhstan Travel Company</title>
+<script>/* Apply saved theme before first paint, without external dependencies. */
+try { if (JSON.parse(localStorage.getItem('theme')) === 'night') document.documentElement.classList.add('theme-night'); } catch (_) {}
+</script>
+<link rel="stylesheet" href="css/style.css">
+<!-- Local jQuery dependency, then shared application modules -->
+<script defer src="js/vendor/jquery.min.js"></script>
+<script defer src="js/tours-data.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/weather.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Kazakhstan Travel Company home"><span class="sun" aria-hidden="true"></span><span>Kazakhstan <strong>Travel</strong></span></a>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false">☰ Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Main menu">
+      <a href="index.html" data-nav="index.html">Tours</a>
+      <a href="tour.html?id=charyn" data-nav="tour.html">Tour guides</a>
+      <a href="weather.html" data-nav="weather.html">Live weather</a>
+      <a href="faq.html" data-nav="faq.html">FAQ</a>
+      <a href="team.html" data-nav="team.html">Team</a>
+      <a href="contact.html" data-guest data-nav="contact.html">Sign up</a>
+      <a href="login.html" data-guest data-nav="login.html">Log in</a>
+      <a href="profile.html" data-member data-nav="profile.html" hidden>My profile</a>
+      <button class="btn btn-small btn-ghost" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      <button class="btn btn-small btn-ghost" id="soundBtn" type="button" aria-pressed="true">Sound: on</button>
+      <button class="btn btn-small" id="openPopup" type="button">Get deals</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <p class="eyebrow">TRAVELER CLUB · FREE DEMO</p><h1>Create your traveler account</h1>
+  <p class="lead">Sign up to save favorite destinations to your personal trip list. Two quick steps, no payments or real bookings.</p>
+  <div class="contact-layout">
+    <form id="regForm" class="form" novalidate>
+      <ol class="steps" aria-label="Form progress">
+        <li class="step-dot active" data-step="1">Step 1: About you</li>
+        <li class="step-dot" data-step="2">Step 2: Password</li>
+      </ol>
+
+      <fieldset class="step" data-step="1">
+        <label for="name">Full name</label>
+        <input type="text" id="name" autocomplete="name" placeholder="Aidos Nurlanov" aria-describedby="nameError">
+        <p class="error" id="nameError"></p>
+
+        <label for="email">Email</label>
+        <input type="text" inputmode="email" id="email" autocomplete="email" placeholder="you@example.com" aria-describedby="emailError">
+        <p class="error" id="emailError"></p>
+        <label for="phone">Phone number</label>
+        <input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+7 777 123 45 67" aria-describedby="phoneError">
+        <p class="error" id="phoneError"></p>
+      </fieldset>
+
+      <fieldset class="step" data-step="2" hidden>
+        <label for="password">Password</label><p class="field-hint">At least 8 characters including uppercase, lowercase, number and symbol.</p>
+        <div class="password-field"><input type="password" id="password" autocomplete="new-password" aria-describedby="passwordError passwordStrength"><button class="password-toggle" data-toggle-password="password" type="button" aria-pressed="false">Show</button></div>
+        <div class="strength-track" aria-hidden="true"><span id="passwordStrengthBar" data-level="weak"></span></div>
+        <p class="field-hint" id="passwordStrength" role="status">Password strength: not entered</p>
+        <p class="error" id="passwordError"></p>
+
+        <label for="confirm">Confirm password</label>
+        <div class="password-field"><input type="password" id="confirm" autocomplete="new-password" aria-describedby="confirmError"><button class="password-toggle" type="button" data-toggle-password="confirm" aria-pressed="false">Show</button></div>
+        <p class="error" id="confirmError"></p>
+      </fieldset>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" id="backBtn" type="button" hidden>Back</button>
+        <button class="btn" id="nextBtn" type="button">Next</button>
+        <button class="btn" id="submitBtn" type="submit" hidden>Create account</button>
+        <button class="btn btn-secondary" id="resetBtn" type="button">Reset form</button>
+      </div>
+      <p class="success" id="formSuccess" role="status" hidden></p><p class="demo-note">Privacy note: this is a frontend-only university demonstration. Account details, including the demo password, stay in this browser's localStorage. Do not use a real password.</p><p>Already registered? <a href="login.html">Log in here →</a></p>
+    </form>
+
+    <!-- Task 8: copy to clipboard -->
+    <aside class="promo-box contact-box">
+      <h2>Contact us</h2>
+      <p>Our sample contact details are here to demonstrate the one-click copy feature.</p>
+      <div class="copy-list">
+        <div class="copy-row">
+          <div>
+            <span class="copy-note">Email</span>
+            <code class="copy-text" id="copyEmail">hello@kztravel.kz</code>
+          </div>
+          <button class="copy-btn" type="button" data-copy-target="#copyEmail" aria-label="Copy email address">
+            <svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+            <span class="tooltip" role="status">Copied to clipboard!</span>
+          </button>
+        </div>
+        <div class="copy-row">
+          <div>
+            <span class="copy-note">Phone</span>
+            <code class="copy-text" id="copyPhone">+7 727 355 10 20</code>
+          </div>
+          <button class="copy-btn" type="button" data-copy-target="#copyPhone" aria-label="Copy phone number">
+            <svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+            <span class="tooltip" role="status">Copied to clipboard!</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 id="popupTitle">Get tour deals by email</h2>
+    <p>Explore the offer signup demo. Subscriptions are saved only in this browser, not sent to a server.</p>
+    <form id="subscribeForm" novalidate>
+      <label for="subEmail">Email</label>
+      <input type="text" inputmode="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-describedby="subError">
+      <p class="error" id="subError"></p>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p class="success" id="subSuccess" hidden>Thanks! Subscription saved on this browser (demo). No emails are sent.</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-links"><a href="index.html">Tours</a><a href="tour.html?id=charyn">Tour guides</a><a href="weather.html">Weather</a><a href="faq.html">FAQ</a><a href="team.html">Team</a><a href="contact.html">Sign up</a><a href="login.html">Log in</a></p>
+  <p>&copy; 2026 Kazakhstan Travel Company · Student travel website · SE-2516</p>
+</footer>
+</body>
+</html>

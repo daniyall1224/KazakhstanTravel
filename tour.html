@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Discover Kazakhstan tours, plan adventures and check live travel weather with our travel website.">
+<title>Tour guide | Kazakhstan Travel Company</title>
+<script>/* Apply saved theme before first paint, without external dependencies. */
+try { if (JSON.parse(localStorage.getItem('theme')) === 'night') document.documentElement.classList.add('theme-night'); } catch (_) {}
+</script>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/vendor/jquery.min.js"></script>
+<script defer src="js/tours-data.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/weather.js"></script>
+<script defer src="js/tour-detail.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Kazakhstan Travel Company home"><span class="sun" aria-hidden="true"></span><span>Kazakhstan <strong>Travel</strong></span></a>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false">☰ Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Main menu">
+      <a href="index.html" data-nav="index.html">Tours</a>
+      <a href="tour.html?id=charyn" data-nav="tour.html">Tour guides</a>
+      <a href="weather.html" data-nav="weather.html">Live weather</a>
+      <a href="faq.html" data-nav="faq.html">FAQ</a>
+      <a href="team.html" data-nav="team.html">Team</a>
+      <a href="contact.html" data-guest data-nav="contact.html">Sign up</a>
+      <a href="login.html" data-guest data-nav="login.html">Log in</a>
+      <a href="profile.html" data-member data-nav="profile.html" hidden>My profile</a>
+      <button class="btn btn-small btn-ghost" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      <button class="btn btn-small btn-ghost" id="soundBtn" type="button" aria-pressed="true">Sound: on</button>
+      <button class="btn btn-small" id="openPopup" type="button">Get deals</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+<section id="tourGuide" class="tour-detail-page" aria-live="polite">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">All tours</a> <span aria-hidden="true">/</span> <span id="tourBreadcrumb">Tour guide</span></nav>
+  <div class="tour-detail-hero">
+    <img id="tourHeroImage" src="images/charyn.jpg" alt="Scenic Kazakhstan destination" width="960" height="640">
+    <div class="tour-detail-overlay"><p class="eyebrow">EXPLORE KAZAKHSTAN · SAMPLE ITINERARY</p><h1 id="tourTitle">Discover a destination</h1><p id="tourSubtitle">Travel inspiration, weather and your personal trip list in one place.</p></div>
+  </div>
+  <div class="tour-info-grid">
+    <article class="tour-detail-content">
+      <div class="tour-meta"><span id="tourDays"></span><span id="tourPrice"></span><span id="tourCategory"></span></div>
+      <h2>Why visit?</h2><p id="tourDescription"></p><p id="tourBestFor" class="hint"></p>
+      <h2>Highlights</h2><ul class="check-list" id="tourHighlights"></ul>
+      <h2>Suggested day-by-day itinerary</h2><ol class="itinerary-list" id="tourItinerary"></ol>
+      <div class="tour-tip"><h3>Travel planning note</h3><p id="tourTip"></p></div>
+    </article>
+    <aside class="tour-detail-aside">
+      <h2>Plan your adventure</h2><p>Save this destination to your demo account or view the weather for your chosen area.</p>
+      <a class="btn btn-full" id="saveTourLink" href="profile.html?save=charyn">♡ Save to my trips</a>
+      <a class="btn btn-secondary btn-full" id="tourWeatherLink" href="weather.html?city=charyn">Check current weather →</a>
+      <p class="demo-note">Sample trip details and estimated prices only. No real purchases or bookings are offered.</p>
+    </aside>
+  </div>
+  <section class="related-trips"><div class="section-heading"><div><p class="eyebrow">KEEP DISCOVERING</p><h2>More destinations</h2></div></div><div id="relatedTrips" class="related-grid"></div></section>
+</section>
+<section id="tourNotFound" class="empty-state" hidden><h1>We couldn’t find that tour.</h1><p>Choose a destination from the main catalog to view its guide.</p><a class="btn" href="index.html#destGrid">Browse tours</a></section>
+</main>
+<div class="overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 id="popupTitle">Get tour deals by email</h2>
+    <p>Explore the offer signup demo. Subscriptions are saved only in this browser, not sent to a server.</p>
+    <form id="subscribeForm" novalidate>
+      <label for="subEmail">Email</label>
+      <input type="text" inputmode="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-describedby="subError">
+      <p class="error" id="subError"></p>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p class="success" id="subSuccess" hidden>Thanks! Subscription saved on this browser (demo). No emails are sent.</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-links"><a href="index.html">Tours</a><a href="tour.html?id=charyn">Tour guides</a><a href="weather.html">Weather</a><a href="faq.html">FAQ</a><a href="team.html">Team</a><a href="contact.html">Sign up</a><a href="login.html">Log in</a></p>
+  <p>&copy; 2026 Kazakhstan Travel Company · Student travel website · SE-2516</p>
+</footer>
+</body>

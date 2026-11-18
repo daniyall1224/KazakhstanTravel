@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore sample Kazakhstan journeys, personalized travel lists, guides and weather information.">
+<title>FAQ | Kazakhstan Travel Company</title>
+<script>/* Apply saved theme before first paint, without external dependencies. */
+try { if (JSON.parse(localStorage.getItem('theme')) === 'night') document.documentElement.classList.add('theme-night'); } catch (_) {}
+</script>
+<link rel="stylesheet" href="css/style.css">
+<!-- Local jQuery dependency, then shared application modules -->
+<script defer src="js/vendor/jquery.min.js"></script>
+<script defer src="js/tours-data.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/weather.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Kazakhstan Travel Company home"><span class="sun" aria-hidden="true"></span><span>Kazakhstan <strong>Travel</strong></span></a>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false">☰ Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Main menu">
+      <a href="index.html" data-nav="index.html">Tours</a>
+      <a href="tour.html?id=charyn" data-nav="tour.html">Tour guides</a>
+      <a href="weather.html" data-nav="weather.html">Live weather</a>
+      <a href="faq.html" data-nav="faq.html">FAQ</a>
+      <a href="team.html" data-nav="team.html">Team</a>
+      <a href="contact.html" data-guest data-nav="contact.html">Sign up</a>
+      <a href="login.html" data-guest data-nav="login.html">Log in</a>
+      <a href="profile.html" data-member data-nav="profile.html" hidden>My profile</a>
+      <button class="btn btn-small btn-ghost" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      <button class="btn btn-small btn-ghost" id="soundBtn" type="button" aria-pressed="true">Sound: on</button>
+      <button class="btn btn-small" id="openPopup" type="button">Get deals</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <p class="eyebrow">PLAN WITH CONFIDENCE</p><h1>Frequently asked questions</h1><p class="lead">Find advice about getting around Kazakhstan, when to go, and what to pack. Search opens matching answers automatically.</p>
+
+  <!-- Task 3: search highlighting -->
+  <div class="search-box">
+    <label for="faqSearch">Search the FAQ</label>
+    <div class="search-field">
+      <input type="search" id="faqSearch" placeholder="Try: visa, tour, guide..." autocomplete="off">
+    </div>
+    <p class="count" id="faqCount" aria-live="polite"></p>
+  </div>
+
+  <p class="hint">Tip: use the Up and Down arrow keys to move between questions.</p>
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">Do I need a visa to visit Kazakhstan?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>Citizens of many countries can stay visa-free for a limited period. Rules change, so check the official e-visa and migration pages before you book.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">What is the best season to travel?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>May to September suits most tours. Mangystau is best in spring and autumn, and the mountains around Almaty are great for skiing from December.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">What is included in the tour price?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>Prices in this student website are example figures only. No actual transport, guides, accommodation or other services are sold or included. A real provider would supply a detailed written itinerary and inclusions.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">Can I cancel or change my booking?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>This is an educational travel-discovery prototype, so it does not accept bookings or payments and there is nothing to cancel. Always read a real operator’s cancellation policy before paying.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">How large are the groups?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>The sample itineraries have no fixed group size. If you book through a real provider, ask about group size and accessibility before choosing a tour.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">Do the guides speak English?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>No guides are contracted through this demo website. For a real trip, confirm your preferred guide language directly with the tour operator.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">What currency should I bring?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>The local currency is the tenge (KZT). Cards work in cities, but bring some cash for markets and small villages on the tour.</p></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-q" type="button" aria-expanded="false"><span class="q-text">What should I pack for a mountain tour?</span><span class="icon">+</span></button>
+      <div class="acc-a"><p>Comfortable hiking shoes, a warm jacket, sunscreen and a water bottle. The weather in the mountains can change quickly, even in summer.</p></div>
+    </div>
+  </div>
+  <section class="next-step"><h2>Still deciding when to travel?</h2><p>View current weather conditions for six popular destinations.</p><a class="btn" href="weather.html">Explore live weather →</a></section>
+</main>
+<div class="overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 id="popupTitle">Get tour deals by email</h2>
+    <p>Explore the offer signup demo. Subscriptions are saved only in this browser, not sent to a server.</p>
+    <form id="subscribeForm" novalidate>
+      <label for="subEmail">Email</label>
+      <input type="text" inputmode="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-describedby="subError">
+      <p class="error" id="subError"></p>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p class="success" id="subSuccess" hidden>Thanks! Subscription saved on this browser (demo). No emails are sent.</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-links"><a href="index.html">Tours</a><a href="tour.html?id=charyn">Tour guides</a><a href="weather.html">Weather</a><a href="faq.html">FAQ</a><a href="team.html">Team</a><a href="contact.html">Sign up</a><a href="login.html">Log in</a></p>
+  <p>&copy; 2026 Kazakhstan Travel Company · Student travel website · SE-2516</p>
+</footer>
+</body>
+</html>

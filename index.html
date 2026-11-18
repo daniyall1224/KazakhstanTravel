@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore sample Kazakhstan journeys, personalized travel lists, guides and weather information.">
+<title>Tours | Kazakhstan Travel Company</title>
+<script>/* Apply saved theme before first paint, without external dependencies. */
+try { if (JSON.parse(localStorage.getItem('theme')) === 'night') document.documentElement.classList.add('theme-night'); } catch (_) {}
+</script>
+<link rel="stylesheet" href="css/style.css">
+<!-- Local jQuery dependency, then shared application modules -->
+<script defer src="js/vendor/jquery.min.js"></script>
+<script defer src="js/tours-data.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/weather.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Kazakhstan Travel Company home"><span class="sun" aria-hidden="true"></span><span>Kazakhstan <strong>Travel</strong></span></a>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false">☰ Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Main menu">
+      <a href="index.html" data-nav="index.html">Tours</a>
+      <a href="tour.html?id=charyn" data-nav="tour.html">Tour guides</a>
+      <a href="weather.html" data-nav="weather.html">Live weather</a>
+      <a href="faq.html" data-nav="faq.html">FAQ</a>
+      <a href="team.html" data-nav="team.html">Team</a>
+      <a href="contact.html" data-guest data-nav="contact.html">Sign up</a>
+      <a href="login.html" data-guest data-nav="login.html">Log in</a>
+      <a href="profile.html" data-member data-nav="profile.html" hidden>My profile</a>
+      <button class="btn btn-small btn-ghost" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      <button class="btn btn-small btn-ghost" id="soundBtn" type="button" aria-pressed="true">Sound: on</button>
+      <button class="btn btn-small" id="openPopup" type="button">Get deals</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <section class="hero">
+    <div class="hero-banner">
+      <p class="eyebrow">YOUR NEXT STORY STARTS IN KAZAKHSTAN</p>
+      <h1>Wild landscapes. Unforgettable journeys.</h1>
+      <p>Discover canyons, mountain lakes, ancient cities and the Caspian coast. Explore six sample trips, check live weather and save your favorites.</p>
+      <div class="hero-links"><a class="btn" href="#destGrid">Explore tours ↓</a><a class="btn btn-outline-light" href="weather.html">Check live weather ↗</a></div>
+    </div>
+
+    <div class="greeting-box">
+      <h2 id="greeting">Welcome!</h2>
+      <form id="nameForm" class="inline-form" novalidate>
+        <label for="nameInput" class="sr-only">Your name</label>
+        <input type="text" id="nameInput" placeholder="Enter your name" autocomplete="given-name" aria-describedby="nameInputError">
+        <button class="btn btn-small" type="submit">Save name</button>
+      </form>
+      <p id="nameInputError" class="error" role="alert" aria-live="polite"></p>
+    </div>
+
+    <div class="hero-row">
+      <div class="clock-box">
+        <span class="clock-label">Local date and time</span>
+        <time id="clock" class="clock">Loading...</time>
+      </div>
+      <button class="btn" id="colorBtn" type="button">Change page color</button>
+    </div>
+  </section>
+
+  <!-- Task 5: animated number counter -->
+  <section class="stats" aria-label="Our numbers">
+    <div class="stat">
+      <span class="counter" data-target="6">0</span>
+      <span class="stat-label">tour ideas to explore</span>
+    </div>
+    <div class="stat">
+      <span class="counter" data-target="6">0</span>
+      <span class="stat-label">destinations</span>
+    </div>
+    <div class="stat">
+      <span class="counter" data-target="8">0</span>
+      <span class="stat-label">connected website pages</span>
+    </div>
+    <div class="stat">
+      <span class="counter" data-target="1">0</span>
+      <span class="stat-label">live weather API</span>
+    </div>
+  </section>
+
+  <div class="section-heading"><div><p class="eyebrow">THE JOURNEYS</p><h2>Find your next adventure</h2></div><p>Sample trip ideas and illustrative prices — not bookable offers.</p></div>
+
+  <!-- Tasks 1 and 2: real-time search with autocomplete suggestions -->
+  <div class="search-box">
+    <label for="tourSearch">Search tours</label>
+    <div class="search-field">
+      <input type="search" id="tourSearch" placeholder="Try: canyon, lake, Bayterek..." autocomplete="off"
+             role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestList">
+      <ul class="suggest" id="suggestList" role="listbox" hidden></ul>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chips" role="group" aria-label="Filter by category">
+      <button class="chip active" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="mountains" aria-pressed="false">Mountains</button>
+      <button class="chip" type="button" data-filter="nature" aria-pressed="false">Nature</button>
+      <button class="chip" type="button" data-filter="city" aria-pressed="false">City</button>
+      <button class="chip" type="button" data-filter="history" aria-pressed="false">History</button>
+    </div>
+    <div class="price-filter">
+      <label for="priceFilter">Price</label>
+      <select id="priceFilter">
+        <option value="any">Any price</option>
+        <option value="low">Under $150</option>
+        <option value="mid">$150 - $250</option>
+        <option value="high">Over $250</option>
+      </select>
+    </div>
+    <div class="sort-filter">
+      <label for="sortFilter">Sort by</label>
+      <select id="sortFilter">
+        <option value="recommended">Recommended</option>
+        <option value="priceLow">Price: low to high</option>
+        <option value="priceHigh">Price: high to low</option>
+        <option value="duration">Duration: shortest first</option>
+      </select>
+    </div>
+    <button class="btn btn-small btn-secondary" type="button" id="resetFilters">Reset filters</button>
+  </div>
+  <p class="count" id="resultCount" aria-live="polite"></p>
+  <section class="dest-grid" id="destGrid"></section>
+
+  <!-- Task 9: lazy loaded photo gallery -->
+  <section class="gallery-section">
+    <h2>Photo gallery</h2>
+    <p class="hint">Explore the scenery. Photos are stored with the project for reliable loading.</p>
+    <div class="gallery">
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/almaty.jpg" alt="Turquoise Big Almaty Lake between snowy mountains" width="960" height="640">
+        <figcaption>Big Almaty Lake</figcaption>
+      </figure>
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/charyn.jpg" alt="Red rock towers of Charyn Canyon at sunset" width="960" height="640">
+        <figcaption>Charyn Canyon</figcaption>
+      </figure>
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/astana.jpg" alt="Bayterek tower and the Astana skyline in the evening" width="960" height="640">
+        <figcaption>Astana</figcaption>
+      </figure>
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/turkestan.jpg" alt="Turquoise dome of the Yasawi Mausoleum in Turkestan" width="960" height="640">
+        <figcaption>Turkestan</figcaption>
+      </figure>
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/mangystau.jpg" alt="White chalk cliffs of Bozzhyra in Mangystau" width="960" height="640">
+        <figcaption>Mangystau</figcaption>
+      </figure>
+      <figure class="photo">
+        <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/burabay.jpg" alt="Granite rocks and pine forest on a calm Burabay lake" width="960" height="640">
+        <figcaption>Burabay</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Task 8: copy to clipboard -->
+  <section class="promo-box">
+    <h2>Promo codes</h2>
+    <p>Interactive demo codes for the UI (not redeemable for real bookings).</p>
+    <div class="copy-list">
+      <div class="copy-row">
+        <div>
+          <code class="copy-text" id="promo1">STEPPE10</code>
+          <span class="copy-note">10% off any tour</span>
+        </div>
+        <button class="copy-btn" type="button" data-copy-target="#promo1" aria-label="Copy promo code STEPPE10">
+          <svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+          <span class="tooltip" role="status">Copied to clipboard!</span>
+        </button>
+      </div>
+      <div class="copy-row">
+        <div>
+          <code class="copy-text" id="promo2">CANYON2026</code>
+          <span class="copy-note">$20 off Charyn Canyon</span>
+        </div>
+        <button class="copy-btn" type="button" data-copy-target="#promo2" aria-label="Copy promo code CANYON2026">
+          <svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+          <span class="tooltip" role="status">Copied to clipboard!</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="fact-box" id="factBox">
+    <h2>Did you know?</h2>
+    <p id="factText">Press the button to learn a random fact about Kazakhstan.</p>
+    <button class="btn" id="factBtn" type="button">Show a random fact</button>
+  </section>
+</main>
+<div class="overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close" id="closePopup" type="button" aria-label="Close">&times;</button>
+    <h2 id="popupTitle">Get tour deals by email</h2>
+    <p>Explore the offer signup demo. Subscriptions are saved only in this browser, not sent to a server.</p>
+    <form id="subscribeForm" novalidate>
+      <label for="subEmail">Email</label>
+      <input type="text" inputmode="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-describedby="subError">
+      <p class="error" id="subError"></p>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p class="success" id="subSuccess" hidden>Thanks! Subscription saved on this browser (demo). No emails are sent.</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-links"><a href="index.html">Tours</a><a href="tour.html?id=charyn">Tour guides</a><a href="weather.html">Weather</a><a href="faq.html">FAQ</a><a href="team.html">Team</a><a href="contact.html">Sign up</a><a href="login.html">Log in</a></p>
+  <p>&copy; 2026 Kazakhstan Travel Company · Student travel website · SE-2516</p>
+</footer>
+</body>
+</html>
